@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+
+{% block title%}
+<title xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Todo List Manage - Taskmate </title>
+{% endblock title %}
+
+{% block content%}
+      <div class="container">
+          </br>
+          <form method="POST">
+              {%csrf_token%}
+              <div class="mb-3">
+                    <input type="text" class="form-control" name="task" placeholder="New Task?">
+              </div>
+
+                    <button type="submit" class="btn btn-primary">Add Task</button>
+          </form>
+          </br>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Task</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for obj in all_tasks %}
+                        {% if obj.status %}
+                            <tr class="table-success">
+                                <td>{{obj.task}}</td>
+                                <td>Completed</td>
+                                <td>Edit</td>
+                                <td>Delete</td>
+
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{obj.task}}</td>
+                                <td>Not Completed</td>
+                                <td>Edit</td>
+                                <td>Delete</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+      </div>
+{% endblock content%}
